@@ -98,7 +98,7 @@ static void stop_thread(MtpServer* server)
         padUpdate(&pad);
         u64 kDown = padGetButtonsDown(&pad);
 
-        if (kDown & KEY_B)
+        if (kDown & HidNpadButton_B)
         {
             server->stop();
             break;
