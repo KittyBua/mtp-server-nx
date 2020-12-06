@@ -88,10 +88,15 @@ void __appExit(void)
 static void stop_thread(MtpServer* server)
 {
 #ifdef WANT_APPLET
+    padConfigureInput(8, HidNpadStyleSet_NpadStandard);
+ 
+    PadState pad;
+    padInitializeAny(&pad);
+
     while (appletMainLoop())
     {
-        hidScanInput();
-        u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+        padUpdate(&pad);
+        u64 kDown = padGetButtonsDown(&pad);
 
         if (kDown & KEY_B)
         {
